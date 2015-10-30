@@ -1,0 +1,59 @@
+<aura:component controller="PipelineGraphController">
+    <aura:registerEvent name="showOppsEvt" type="c:PipelineGraphShowOppsEvent" />
+    <aura:handler event="c:PipelineGraphDateFilterEvent" action="{!c.init}" />
+    <aura:attribute name="totalAmount" type="Decimal" />
+    <aura:attribute name="wonAmount" type="Decimal" />
+    <aura:attribute name="lostAmount" type="Decimal" />
+    <aura:attribute name="openAmount" type="Decimal" />
+    <aura:attribute name="pushAmount" type="Decimal" />
+    <aura:attribute name="date1" type="String" />
+    <aura:attribute name="date2" type="String" />
+    <aura:attribute name="year" type="Integer" />
+    <aura:attribute name="fiscalQuarter" type="String" />
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="graphType" type="String" default="Total" required="true" />
+    
+    
+    <div id="{!globalId + '_bodyBox'}" class="bodyBox">
+        <div id="{!globalId + '_totalBarBox'}" class="barBox">
+            <div id="{!globalId + '_totalBar'}" class="totalBar" onclick="{!c.showOpps}">
+                <ui:outputCurrency value="{!v.totalAmount}" />
+            </div>
+            <aura:renderIf isTrue="{! !empty(v.totalAmount)}">
+                <ui:outputText value="{!v.graphType + ' Pipeline'}" />
+            </aura:renderIf>
+        </div>
+        <div id="{!globalId + '_wonBarBox'}" class="barBox">
+            <div id="{!globalId + '_wonBar'}" class="wonBar" onclick="{!c.showOpps}">
+                <ui:outputCurrency value="{!v.wonAmount}" />
+            </div>
+            <aura:renderIf isTrue="{! !empty(v.wonAmount)}">
+                <ui:outputText value="{!v.graphType + ' Won'}" />
+            </aura:renderIf>
+        </div>
+        <div id="{!globalId + '_lostBarBox'}" class="barBox">
+            <div id="{!globalId + '_lostBar'}" class="lostBar" onclick="{!c.showOpps}">
+                <ui:outputCurrency value="{!v.lostAmount}" />
+            </div>
+            <aura:renderIf isTrue="{! !empty(v.lostAmount)}">
+                <ui:outputText value="{!v.graphType + ' Lost'}" />
+            </aura:renderIf>
+        </div>
+        <div id="{!globalId + '_pushBarBox'}" class="barBox">
+            <div id="{!globalId + '_pushBar'}" class="pushBar" onclick="{!c.showOpps}">
+                <ui:outputCurrency value="{!v.pushAmount}" />
+            </div>
+            <aura:renderIf isTrue="{! !empty(v.pushAmount)}">
+                <ui:outputText value="{!v.graphType + ' Pushed'}" />
+            </aura:renderIf>
+        </div>
+    </div>
+    <!--div id="{!globalId + '_openBarBox'}" class="barBox">
+        <div id="{!globalId + '_openBar'}" class="openBar" onclick="{!c.showOpps}">
+            <ui:outputCurrency value="{!v.openAmount}" />
+        </div>
+        <aura:renderIf isTrue="{! !empty(v.openAmount)}">
+            <ui:outputText value="Open Opps Amount" />
+        </aura:renderIf>	
+    </div-->
+</aura:component>

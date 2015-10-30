@@ -1,0 +1,26 @@
+<aura:component controller="PipelineGraphController">
+    <aura:registerEvent name="filterEvent" type="c:PipelineGraphDateFilterEvent" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="params" type="Map" default="{}" />
+    <aura:attribute name="users" type="User[]" />
+    <div class="bodyBox">
+        <div class="filterBox">
+            <ui:inputSelect label="Set year:" class="dynamic" aura:id="yearSelector"/>
+            <ui:inputSelect aura:id="fiscalQuarter" label="Set Quarter:">
+                <ui:inputSelectOption text="1" />
+                <ui:inputSelectOption text="2" />
+                <ui:inputSelectOption text="3" />
+                <ui:inputSelectOption text="4" />
+            </ui:inputSelect>
+            <ui:inputSelect aura:id="userSelector" label="Set User:">
+                <aura:iteration var="item" items="{!v.users}">
+                    <ui:inputSelectOption label="{!item.Name}" text="{!item.Id}" />
+                </aura:iteration>
+            </ui:inputSelect>
+        </div>
+        <!--ui:inputDate aura:id="fstDate" label="Day1" displayDatePicker="true" />
+    #F0F0F0
+        <ui:inputDate aura:id="sndDate" label="Day2" displayDatePicker="true" /-->
+        <ui:button label="Run" press="{!c.send}" />
+    </div>
+</aura:component>

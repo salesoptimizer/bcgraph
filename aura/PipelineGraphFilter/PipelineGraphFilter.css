@@ -1,0 +1,24 @@
+.THIS.bodyBox {
+    padding: 10px;
+}
+
+.THIS.bodyBox .filterBox {
+    background: #F0F0F0;
+    border: 1px solid #DCDCDC;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.THIS.bodyBox .filterBox label {
+    padding-right: 10px;
+}
+
+.THIS.bodyBox .filterBox .uiInput {
+    margin-bottom: 5px;
+}
+
+.THIS.bodyBox .filterBox .uiInput:last-child {
+    margin: 0;
+}

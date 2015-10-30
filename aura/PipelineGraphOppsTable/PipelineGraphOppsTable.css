@@ -1,0 +1,15 @@
+.THIS.oppsTable {
+	border-collapse: collapse;    
+    margin: 20px;
+}
+
+.THIS.oppsTable tr td {
+    border: 1px solid #332E2E;
+    padding: 7px;
+    font-size: 15px;
+}
+
+.THIS.oppsTable tr:first-child td {
+    font-weight: bold;
+    text-align: center;
+}

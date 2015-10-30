@@ -1,0 +1,15 @@
+<apex:page >
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="lightning" />
+    <script>
+        $Lightning.use("c:TestApp", 
+            function() {
+                $Lightning.createComponent("c:PipelineGraphWrapper",
+                    {},
+                    "lightning",
+                    function(cmp) {
+                    // do some stuff
+                });
+        });
+    </script>
+</apex:page>

@@ -1,0 +1,24 @@
+<aura:component >
+    <aura:handler event="c:PipelineGraphShowOppsEvent" action="{!c.showOpps}" />
+    <aura:handler event="c:PipelineGraphDateFilterEvent" action="{!c.clearOpps}" />
+    <aura:attribute name="opps" type="Opportunity[]" />
+    <aura:attribute name="hostname" type="String" />
+    <aura:renderIf isTrue="{! !empty(v.opps)}">
+        <table class="oppsTable">
+            <tr>
+                <td>Name</td>
+                <td>Amount</td>
+                <td>Close Date</td>
+                <td>Created Date</td>
+            </tr>
+                <aura:iteration var="item" items="{!v.opps}">
+                    <tr>
+                        <td><ui:outputURL label="{!item.Name}" value="{!'https://' + v.hostname + '.my.salesforce.com/' + item.Id}" /></td>
+                        <td><ui:outputCurrency value="{!item.Amount}" /></td>
+                        <td><ui:outputDate value="{!item.CloseDate}" /></td>
+                        <td><ui:outputDate value="{!item.CreatedDate}" /></td>
+                    </tr>
+                </aura:iteration>
+        </table>
+    </aura:renderIf>
+</aura:component>

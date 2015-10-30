@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION">
+    <aura:attribute name="opps" type="Opportunity[]" />
+</aura:event>

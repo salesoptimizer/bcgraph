@@ -1,0 +1,68 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+  <apex:includeScript value="/lightning/lightning.out.js" />
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <head>
+      <title>SFDS Pipeline Graph</title>
+      <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+    </head>
+    <body>
+      <div class="slds">
+        <div class="slds-grid">
+          <div class="slds-col slds-size--1-of-6">
+            <div id="filter" />
+          </div>
+          <div class="slds-col slds-size--3-of-6">
+            <div id="graphTotal" />
+          </div>
+          <div class="slds-col slds-size--2-of-6">
+            <div id="graphExisting" />
+            <div id="graphNew" />
+            <div id="graphMoved" />
+          </div>
+        </div>
+        <div id="oppsTable" />
+      </div>
+    </body>
+  </html>
+  <script>
+      $Lightning.use("c:TestApp", 
+          function() {
+              $Lightning.createComponent("c:PipelineGraphFilter",
+                  {},
+                  "filter",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  {},
+                  "graphTotal",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  { graphType : "Existing" },
+                  "graphExisting",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  { graphType : "New" },
+                  "graphNew",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  { graphType : "Moved in" },
+                  "graphMoved",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraphOppsTable",
+                  {},
+                  "oppsTable",
+                  function(cmp) {
+                  // do some stuff
+              });
+      });
+  </script>
+</apex:page>

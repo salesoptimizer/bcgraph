@@ -1,0 +1,62 @@
+.THIS.bodyBox {
+    overflow: hidden;
+    background: #F0F0F0;
+    border: 1px solid #DCDCDC;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    height: 189px;
+}
+
+.THIS.total {
+    height: 630px;
+}
+
+.THIS.bodyBox:last-child {
+    margin: 0;
+}
+
+.THIS.bodyBox .barBox {
+    float: left;
+    margin: 20px;
+    text-align: center;
+    position: relative;
+    left: 0;
+    height: 170px;
+}
+
+.THIS.bodyBox .barBox div {
+    cursor: pointer;
+    width: 100px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.THIS.total .barBox div {
+    width: 170px;
+}
+
+.THIS.bodyBox .barBox div span {
+    position: relative;
+    left: 0;
+    bottom: 20px;
+}
+
+.THIS.bodyBox .barBox .totalBar {
+    background: #296593;
+}
+
+.THIS.bodyBox .barBox .wonBar {
+    background: #127D48;
+}
+
+.THIS.bodyBox .barBox .lostBar {
+    background: #DB3B3B;
+}
+
+.THIS.bodyBox .barBox .openBar {
+    background: blue;
+}
+
+.THIS.bodyBox .barBox .pushBar {
+    background: #D7A74E;
+}
