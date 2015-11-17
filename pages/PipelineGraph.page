@@ -1,6 +1,6 @@
-<apex:page >
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" standardController="Funnel_Waterfall__c">
     <apex:includeScript value="/lightning/lightning.out.js" />
-    <div id="lightning" />
+    <div id="lightning" style="min-width: 1508px" />
     <script>
         $Lightning.use("c:TestApp", 
             function() {

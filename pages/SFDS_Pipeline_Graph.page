@@ -1,20 +1,51 @@
-<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" standardController="Funnel_Waterfall__c">
   <apex:includeScript value="/lightning/lightning.out.js" />
   <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <head>
-      <title>SFDS Pipeline Graph</title>
+      <title>Pipeline Waterfall</title>
       <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+      <style>
+        .filter-panel {
+          width: 20%;
+          position: relative;
+        }
+        
+        .array {
+          position: absolute;
+          top: 20px;
+          right: 0;
+          border-top: 1px solid #DCDCDC;
+          border-right: 1px solid #DCDCDC;
+          border-bottom: 1px solid #DCDCDC;
+          cursor: pointer;
+          background: #F0F0F0;
+          padding: 5px 0;
+        }
+        
+        .total-panel {
+          width: 55%;
+        }
+        
+        .subtotal-panel {
+          width: 25%;
+        }
+      </style>
     </head>
     <body>
       <div class="slds">
-        <div class="slds-grid">
-          <div class="slds-col slds-size--1-of-6">
+        <div id="graphHeader" />
+        <div class="slds-grid" style="min-width: 1508px">
+          <div id="filter-panel" class="slds-col filter-panel">
             <div id="filter" />
+            <div class="array" onclick="hideFilter()">
+              <img id="array-left" width="20px" src="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility/chevronleft_60.png')}" alt="left" />
+              <img id="array-right" width="20px" src="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility/chevronright_60.png')}" alt="right" style="display: none" />
+            </div>
           </div>
-          <div class="slds-col slds-size--3-of-6">
+          <div id="total-panel" class="slds-col total-panel" style="padding: 10px 10px;">
             <div id="graphTotal" />
           </div>
-          <div class="slds-col slds-size--2-of-6">
+          <div id="subtotal-panel" class="slds-col subtotal-panel" style="padding: 10px 10px;">
             <div id="graphExisting" />
             <div id="graphNew" />
             <div id="graphMoved" />
@@ -25,11 +56,11 @@
     </body>
   </html>
   <script>
-      $Lightning.use("c:TestApp", 
+      $Lightning.use("c:SFDSPipelineGraphApp", 
           function() {
-              $Lightning.createComponent("c:PipelineGraphFilter",
+              $Lightning.createComponent("c:PipelineGraphHeader",
                   {},
-                  "filter",
+                  "graphHeader",
                   function(cmp) {
                   // do some stuff
               });
@@ -57,12 +88,42 @@
                   function(cmp) {
                   // do some stuff
               });
-              $Lightning.createComponent("c:PipelineGraphOppsTable",
+              $Lightning.createComponent("c:SFDCPipelineGraphOppsTable",
                   {},
                   "oppsTable",
                   function(cmp) {
                   // do some stuff
               });
+              $Lightning.createComponent("c:PipelineGraphFilter",
+                  {},
+                  "filter",
+                  function(cmp) {
+                  // do some stuff
+              });
       });
+      
+      function hideFilter() {
+        var filter = document.getElementById("filter");
+        var panel = document.getElementById("filter-panel");
+        var total = document.getElementById("total-panel");
+        var stotal = document.getElementById("subtotal-panel");
+        var larray = document.getElementById("array-left");
+        var rarray = document.getElementById("array-right");
+        if (filter.style.display == 'none') {
+          filter.style.display = 'block';
+          panel.style.width = '20%';
+          total.style.width = '55%';
+          stotal.style.width = '25%';
+          rarray.style.display = 'none';
+          larray.style.display = 'block';
+        } else {
+          filter.style.display = 'none';
+          panel.style.width = '0';
+          total.style.width = '64%';
+          stotal.style.width = '34%';
+          larray.style.display = 'none';
+          rarray.style.display = 'block';
+        }
+      }
   </script>
 </apex:page>

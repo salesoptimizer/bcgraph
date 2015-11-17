@@ -4,10 +4,10 @@
     </div>
     <div style="float: left;">
         <div style="overflow: hidden">
-            <div style="float: left;padding: 20px 10px">
-            	<c:PipelineGraph />
+            <div style="float: left;padding: 10px 10px">
+                <c:PipelineGraph /> 
             </div>
-            <div style="float: right;padding: 20px 10px">
+            <div style="float: right;padding: 10px 10px">
             	<c:PipelineGraph graphType="Existing" /> 
                 <c:PipelineGraph graphType="New" /> 
                 <c:PipelineGraph graphType="Moved in" /> 

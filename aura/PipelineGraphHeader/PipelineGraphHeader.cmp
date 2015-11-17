@@ -1,0 +1,5 @@
+<aura:component>
+    <aura:handler event="c:PipelineGraphDateFilterEvent" action="{!c.setPrintUrl}" />
+    <aura:attribute name="url" type="String" />
+	<ui:outputURL value="" label="Printable view" click="{!c.openPrintView}" />
+</aura:component>

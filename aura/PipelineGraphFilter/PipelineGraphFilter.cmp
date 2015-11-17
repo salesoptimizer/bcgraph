@@ -1,26 +1,20 @@
 <aura:component controller="PipelineGraphController">
     <aura:registerEvent name="filterEvent" type="c:PipelineGraphDateFilterEvent" />
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
-    <aura:attribute name="params" type="Map" default="{}" />
-    <aura:attribute name="users" type="User[]" />
+    <aura:attribute name="year" type="Integer" />
+    <aura:attribute name="quarter" type="Integer" />
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="myOpps" type="Boolean" />
+    <aura:attribute name="managers" type="Id[]" />
     <div class="bodyBox">
         <div class="filterBox">
-            <ui:inputSelect label="Set year:" class="dynamic" aura:id="yearSelector"/>
-            <ui:inputSelect aura:id="fiscalQuarter" label="Set Quarter:">
-                <ui:inputSelectOption text="1" />
-                <ui:inputSelectOption text="2" />
-                <ui:inputSelectOption text="3" />
-                <ui:inputSelectOption text="4" />
-            </ui:inputSelect>
-            <ui:inputSelect aura:id="userSelector" label="Set User:">
-                <aura:iteration var="item" items="{!v.users}">
-                    <ui:inputSelectOption label="{!item.Name}" text="{!item.Id}" />
-                </aura:iteration>
-            </ui:inputSelect>
+            <ui:inputSelect aura:id="yearSelector" class="dynamic" label="Set year:" />
+            <ui:inputSelect aura:id="fiscalQuarter" class="dynamic" label="Set Quarter:" />
+            <ui:inputSelect aura:id="userSelector" class="dynamic" label="Set User:" change="{!c.onSelectChange}" />
+            <div id="managerCheckboxBox" style="visibility: hidden">
+                <ui:inputCheckbox aura:id="managerCheckbox" label="My Opportunities" value="false" />
+            </div>
         </div>
-        <!--ui:inputDate aura:id="fstDate" label="Day1" displayDatePicker="true" />
-    #F0F0F0
-        <ui:inputDate aura:id="sndDate" label="Day2" displayDatePicker="true" /-->
         <ui:button label="Run" press="{!c.send}" />
     </div>
 </aura:component>

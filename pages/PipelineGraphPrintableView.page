@@ -1,0 +1,92 @@
+<apex:page showHeader="false" sidebar="false">
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <head>
+      <title>Pipeline Waterfall</title>
+      <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+      <style>
+        
+        .wrapper {
+          width: 1508px;
+          margin: 0 auto;
+        }
+        
+        #graphTotal {
+          float: left;
+          width: 60%;
+          margin-right: 15px;
+        }
+      
+        .bodyBox {
+          background: none !important;
+          border-color: #000 !important;
+          color: #000 !important;
+        }
+        
+        .totalBar, .wonBar, .lostBar, .pushBar {
+          background: #000 !important;
+          border-radius: 0 !important;
+          border: 2px solid #000;
+        }
+        
+        @media print  {
+          .noprint {
+            display: none;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="slds">
+        <apex:includeLightning />
+        <div id="filter" style="display: none" />
+        <div class="wrapper">
+          <div>
+            <span class="noprint"><a href="javascript:window.print();">Print</a></span>
+          </div>
+          <div id="graphTotal" />
+          <div>
+            <div id="graphExisting" />
+            <div id="graphNew" />
+            <div id="graphMoved" />
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+  <script>
+      $Lightning.use("c:SFDSPipelineGraphApp", 
+          function() {
+              $Lightning.createComponent("c:PipelineGraph",
+                  {},
+                  "graphTotal",
+                  function(cmp) {
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  { graphType : "Existing" },
+                  "graphExisting",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  { graphType : "New" },
+                  "graphNew",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraph",
+                  { graphType : "Moved in" },
+                  "graphMoved",
+                  function(cmp) {
+                  // do some stuff
+              });
+              $Lightning.createComponent("c:PipelineGraphFilter",
+                  { year: {!$CurrentPage.parameters.year},
+                    quarter: {!$CurrentPage.parameters.quarter},
+                    userId: {!$CurrentPage.parameters.userId},
+                    myOpps: {!$CurrentPage.parameters.myOpps}},
+                  "filter",
+                  function(cmp) {
+              });
+      });
+  </script>
+</apex:page>

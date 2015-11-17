@@ -2,43 +2,68 @@
     overflow: hidden;
     background: #F0F0F0;
     border: 1px solid #DCDCDC;
-    padding-top: 10px;
-    margin-bottom: 20px;
-    height: 189px;
+    height: 200px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    padding-top: 12px;
+    text-align: center;
 }
 
 .THIS.total {
     height: 630px;
-}
-
-.THIS.bodyBox:last-child {
-    margin: 0;
+    min-width: 720px;
+    padding-top: 10px;
 }
 
 .THIS.bodyBox .barBox {
     float: left;
-    margin: 20px;
     text-align: center;
     position: relative;
     left: 0;
     height: 170px;
+    width: 21%;
+    margin: 2%;
 }
 
 .THIS.bodyBox .barBox div {
     cursor: pointer;
-    width: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border-radius: 10px;
-}
-
-.THIS.total .barBox div {
-    width: 170px;
 }
 
 .THIS.bodyBox .barBox div span {
     position: relative;
     left: 0;
-    bottom: 20px;
+    bottom: 22px;
+}
+
+.THIS.bodyBox .selectedBar div {
+    border: 2px solid #fff;
+}
+
+.THIS.bodyBox .selectedBar .totalBar {
+    box-shadow: 0 0 0 2px #296593;
+}
+
+.THIS.bodyBox .selectedBar .wonBar {
+    box-shadow: 0 0 0 2px #127D48;
+}
+
+.THIS.bodyBox .selectedBar .lostBar {
+    box-shadow: 0 0 0 2px #DB3B3B;
+}
+
+.THIS.bodyBox .selectedBar .pushBar {
+    box-shadow: 0 0 0 2px #D7A74E;
+}
+
+.THIS.bodyBox .selectedBar div span {
+    bottom: 24px;
+}
+
+.THIS.bodyBox .selectedBar div span,
+.THIS.bodyBox .selectedBar span {
+    font-weight: bold;
 }
 
 .THIS.bodyBox .barBox .totalBar {
@@ -51,10 +76,6 @@
 
 .THIS.bodyBox .barBox .lostBar {
     background: #DB3B3B;
-}
-
-.THIS.bodyBox .barBox .openBar {
-    background: blue;
 }
 
 .THIS.bodyBox .barBox .pushBar {

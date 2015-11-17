@@ -7,16 +7,16 @@
         <table class="oppsTable">
             <tr>
                 <td>Name</td>
-                <td>Amount</td>
                 <td>Close Date</td>
-                <td>Created Date</td>
+                <td>Stage</td>
+                <td>Amount</td>
             </tr>
                 <aura:iteration var="item" items="{!v.opps}">
                     <tr>
                         <td><ui:outputURL label="{!item.Name}" value="{!'https://' + v.hostname + '.my.salesforce.com/' + item.Id}" /></td>
-                        <td><ui:outputCurrency value="{!item.Amount}" /></td>
                         <td><ui:outputDate value="{!item.CloseDate}" /></td>
-                        <td><ui:outputDate value="{!item.CreatedDate}" /></td>
+                        <td><ui:outputDate value="{!item.StageName}" /></td>
+                        <td><ui:outputCurrency value="{!item.Amount}" /></td>
                     </tr>
                 </aura:iteration>
         </table>

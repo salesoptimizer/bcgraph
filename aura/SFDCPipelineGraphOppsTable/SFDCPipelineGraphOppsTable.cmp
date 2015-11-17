@@ -1,0 +1,43 @@
+<aura:component >
+	<aura:handler event="c:PipelineGraphShowOppsEvent" action="{!c.showOpps}" />
+    <aura:handler event="c:PipelineGraphDateFilterEvent" action="{!c.clearOpps}" />
+    <aura:attribute name="opps" type="Opportunity[]" />
+    <aura:attribute name="tableName" type="String" />
+    <aura:renderIf isTrue="{! !empty(v.opps)}">
+        <ui:outputText value="{!v.tableName}" class="tableName" />
+        <table class="slds-table slds-table--bordered">
+          <thead>
+            <tr class="slds-text-heading--label">
+              <th scope="col">
+                <span class="slds-truncate">Opportunity Name</span>
+              </th>
+              <th scope="col">
+                <span class="slds-truncate">Close Date</span>
+              </th>
+              <th scope="col">
+                <span class="slds-truncate">Stage</span>
+              </th>
+              <th scope="col">
+                <span class="slds-truncate">Amount</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <aura:iteration var="item" items="{!v.opps}">
+                <tr class="slds-hint-parent">
+                  <th data-label="opportunity-name" role="row"><ui:outputURL label="{!item.Name}" value="{!'/' + item.Id}" /></th>
+                  <td data-label="activity">
+                    <span class="slds-truncate"><ui:outputDate value="{!item.CloseDate}" /></span>
+                  </td>
+                  <td data-label="stage">
+                    <span class="slds-truncate">{!item.StageName}</span>
+                  </td>
+                  <td data-label="amount">
+                    <ui:outputCurrency class="slds-truncate" value="{!item.Amount}" />
+                  </td>
+                </tr>
+              </aura:iteration>
+          </tbody>
+        </table>
+    </aura:renderIf>
+</aura:component>

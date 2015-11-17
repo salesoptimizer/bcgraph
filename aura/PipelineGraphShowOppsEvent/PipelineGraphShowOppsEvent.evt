@@ -1,3 +1,4 @@
 <aura:event type="APPLICATION">
     <aura:attribute name="opps" type="Opportunity[]" />
+    <aura:attribute name="tableName" type="String" />
 </aura:event>

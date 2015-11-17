@@ -1,15 +1,14 @@
 <aura:component controller="PipelineGraphController">
     <aura:registerEvent name="showOppsEvt" type="c:PipelineGraphShowOppsEvent" />
+    <aura:registerEvent name="printViewEvent" type="c:PipelineGraphPrintableView" />
     <aura:handler event="c:PipelineGraphDateFilterEvent" action="{!c.init}" />
     <aura:attribute name="totalAmount" type="Decimal" />
     <aura:attribute name="wonAmount" type="Decimal" />
     <aura:attribute name="lostAmount" type="Decimal" />
-    <aura:attribute name="openAmount" type="Decimal" />
     <aura:attribute name="pushAmount" type="Decimal" />
-    <aura:attribute name="date1" type="String" />
-    <aura:attribute name="date2" type="String" />
     <aura:attribute name="year" type="Integer" />
-    <aura:attribute name="fiscalQuarter" type="String" />
+    <aura:attribute name="fiscalQuarter" type="Integer" />
+    <aura:attribute name="myOpps" type="Boolean" />
     <aura:attribute name="userId" type="String" />
     <aura:attribute name="graphType" type="String" default="Total" required="true" />
     
@@ -48,12 +47,4 @@
             </aura:renderIf>
         </div>
     </div>
-    <!--div id="{!globalId + '_openBarBox'}" class="barBox">
-        <div id="{!globalId + '_openBar'}" class="openBar" onclick="{!c.showOpps}">
-            <ui:outputCurrency value="{!v.openAmount}" />
-        </div>
-        <aura:renderIf isTrue="{! !empty(v.openAmount)}">
-            <ui:outputText value="Open Opps Amount" />
-        </aura:renderIf>	
-    </div-->
 </aura:component>

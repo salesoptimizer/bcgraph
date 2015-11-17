@@ -2,12 +2,14 @@
 	getTotalAmount : function(component) {
 		var globalId = component.getGlobalId();
         var totalHeight = document.getElementById(globalId + "_bodyBox").offsetHeight - 72;
-        var action = this.getActionOppsAmount(component, component.get("v.graphType").toLowerCase(), "Total");
+        var action = component.get("c.getTotalOppsAmount");
         if (this.isInits(action)) {
             action.setParams({
                 userId: component.get("v.userId"),
                 year: component.get("v.year"),
-                quarter: component.get("v.fiscalQuarter")
+                quarter: component.get("v.fiscalQuarter"),
+                graphType: component.get("v.graphType").toLowerCase(),
+                onlyMyOpps: component.get("v.myOpps")
             });
             action.setCallback(this, function(response) {
                 var state = response.getState();
@@ -24,12 +26,14 @@
     getWonAmount : function(component) {
         var globalId = component.getGlobalId();
         var totalHeight = document.getElementById(globalId + "_bodyBox").offsetHeight - 72;
-        var action = this.getActionOppsAmount(component, component.get("v.graphType").toLowerCase(), "Won");
+        var action = component.get("c.getWonOppsAmount");
         if (this.isInits(action)) {
             action.setParams({
                 userId: component.get("v.userId"),
                 year: component.get("v.year"),
-                quarter: component.get("v.fiscalQuarter")
+                quarter: component.get("v.fiscalQuarter"),
+                graphType: component.get("v.graphType").toLowerCase(),
+                onlyMyOpps: component.get("v.myOpps")
             });
             action.setCallback(this, function(response) {
                 var state = response.getState();
@@ -46,12 +50,14 @@
     getLostAmount : function(component) {
         var globalId = component.getGlobalId();
         var totalHeight = document.getElementById(globalId + "_bodyBox").offsetHeight - 72;
-        var action = this.getActionOppsAmount(component, component.get("v.graphType").toLowerCase(), "Lost");
+        var action = component.get("c.getLostOppsAmount");
         if (this.isInits(action)) {
             action.setParams({
                 userId: component.get("v.userId"),
                 year: component.get("v.year"),
-                quarter: component.get("v.fiscalQuarter")
+                quarter: component.get("v.fiscalQuarter"),
+                graphType: component.get("v.graphType").toLowerCase(),
+                onlyMyOpps: component.get("v.myOpps")
             });
             action.setCallback(this, function(response) {
                 var state = response.getState();
@@ -68,12 +74,14 @@
     getPushAmount : function(component) {
         var globalId = component.getGlobalId();
         var totalHeight = document.getElementById(globalId + "_bodyBox").offsetHeight - 72;
-        var action = this.getActionOppsAmount(component, component.get("v.graphType").toLowerCase(), "Push");
+        var action = component.get("c.getPushOppsAmount");
         if (this.isInits(action)) {
             action.setParams({
                 userId: component.get("v.userId"),
                 year: component.get("v.year"),
-                quarter: component.get("v.fiscalQuarter")
+                quarter: component.get("v.fiscalQuarter"),
+                graphType: component.get("v.graphType").toLowerCase(),
+                onlyMyOpps: component.get("v.myOpps")
             });
             action.setCallback(this, function(response) {
                 var state = response.getState();
@@ -87,37 +95,17 @@
         }
 	},
 	
-	getActionOppsAmount : function(component, graphType, type) {
+	getActionOpps : function(component, barType) {
 	    var action;
-	    if (this.isInits(graphType) && graphType.length > 0 &&
-	        this.isInits(type) && type.length > 0) {
-    	    switch (graphType) {
-                case "new":   	 	 action = component.get("c.getNew" + type + "OppsAmount");
-                               	  	 break;
-                case "moved in":     action = component.get("c.getMoved" + type + "OppsAmount");
-                               	 	 break;
-                case "existing":     action = component.get("c.getExisting" + type + "OppsAmount");
-                                     break;
-                case "total": 		 action = component.get("c.get" + type + "OppsAmount");
-                                     break;
-                default: break;
-            }
-	    }
-	    return action;
-	},
-	
-	getActionOpps : function(component, barType, graphType) {
-	    var action;
-	    if (this.isInits(barType) && barType.length > 0 &&
-	        this.isInits(graphType)) {
+	    if (this.isInits(barType) && barType.length > 0) {
     	    switch (barType) {
-                case "totalBar": action = component.get("c.get" + graphType + "TotalOpps");
+                case "totalBar": action = component.get("c.getTotalOpps");
                                  break;
-                case "wonBar":   action = component.get("c.get" + graphType + "WonOpps");
+                case "wonBar":   action = component.get("c.getWonOpps");
                                  break;
-                case "lostBar":  action = component.get("c.get" + graphType + "LostOpps");
+                case "lostBar":  action = component.get("c.getLostOpps");
                                  break;
-                case "pushBar":  action = component.get("c.get" + graphType + "PushOpps");
+                case "pushBar":  action = component.get("c.getPushOpps");
                                  break;
                 default: break;
             }
@@ -165,6 +153,21 @@
         		var top = totalHeight - height;
                 document.getElementById(globalId + "_" + amounts[i][0] + "BarBox").style.top = top + "px";
     	    }
+	    }
+	},
+	
+	highlightBar : function(component, targetId) {
+	    this.deselectBars();
+	    var targetBar = document.getElementById(targetId);
+	    targetBar.className = targetBar.className + " selectedBar";
+	},
+	
+	deselectBars : function() {
+	    var selectedBars = document.getElementsByClassName("selectedBar");
+	    if (selectedBars.length > 0) {
+	        for (var i = 0; i < selectedBars.length; i++) {
+	            selectedBars[i].className = selectedBars[i].className.split(" ")[0];
+	        }
 	    }
 	}
 })

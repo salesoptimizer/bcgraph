@@ -1,10 +1,11 @@
 ({
 	init : function(component, event, helper) {
         var params = event.getParam("params");
-        for (key in params) {
+        if (helper.isInits(params)) {
             component.set("v.year", params["year"]);
             component.set("v.fiscalQuarter", params["fiscalQuarter"]);
             component.set("v.userId", params["userId"]);
+            component.set("v.myOpps", params["myOpps"]);
         }
         
         var globalId = component.getGlobalId();
@@ -17,6 +18,7 @@
         helper.getWonAmount(component);
         helper.getLostAmount(component);
         helper.getPushAmount(component);
+        helper.deselectBars();
 	},
     
     showOpps : function(component, event, helper) {
@@ -24,28 +26,22 @@
         var targetId = event.target.id;
         var targetIdPart = targetId.split("_");
         var graphType = component.get("v.graphType").toLowerCase();
-        switch (graphType) {
-            case "total": action = helper.getActionOpps(component, targetIdPart[1], "");
-                          break;
-            case "new": action = helper.getActionOpps(component, targetIdPart[1], "New");
-                        break;
-            case "moved in": action = helper.getActionOpps(component, targetIdPart[1], "Moved");
-                             break;
-            case "existing": action = helper.getActionOpps(component, targetIdPart[1], "Existing");
-                             break;
-            default: break;
-        }
-        if (helper.isInits(action)) {
+        action = helper.getActionOpps(component, targetIdPart[1])
+        if (helper.isInits(action) && helper.isInits(graphType)) {
             action.setParams({
                 userId: component.get("v.userId"),
                 year: component.get("v.year"),
-                quarter: component.get("v.fiscalQuarter")
+                quarter: component.get("v.fiscalQuarter"),
+                graphType: graphType,
+                onlyMyOpps: component.get("v.myOpps")
             });
             action.setCallback(this, function(response) {
                 var state = response.getState();
                 if (state === "SUCCESS") {
+                    helper.highlightBar(component, targetId+"Box");
                     $A.get("e.c:PipelineGraphShowOppsEvent").setParams({
-                        "opps": response.getReturnValue()
+                        "opps": response.getReturnValue(),
+                        "tableName": document.getElementById(targetId+"Box").getElementsByTagName("span")[1].innerHTML
                     }).fire();
                 }
             });
